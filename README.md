@@ -62,7 +62,7 @@ Please note that Turbo is still in development and not recommended for productio
 To get started with Turbo, here is an example:
 
 ```ts
-import { find, free, init, load, type Routes } from "https://deno.land/x/turbo";
+import { find, free, init, load, type Routes } from "https://deno.land/x/turbo/mod.ts";
 
 // Define the hostname and port for the server
 const HOSTNAME = "localhost";
