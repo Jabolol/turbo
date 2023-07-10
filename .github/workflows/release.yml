@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
-        run: apt-get update && apt-get install -y --no-install-recommends make gcc libc6-dev
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends make gcc libc6-dev
 
       - name: Build Native Library
         run: make
