@@ -29,12 +29,9 @@ jobs:
         if: runner.os == 'Linux'
         run: strip libturbo.so
 
-      - name: Set description
+      - name: Determine release body
         run: |
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "DESCRIPTION<<$EOF" >> "$GITHUB_ENV"
-          git log --oneline --no-decorate $(git describe --tags --abbrev=0 @^)..@ >> "$GITHUB_ENV"
-          echo "$EOF" >> "$GITHUB_ENV"
+          echo "$(git log --oneline --no-decorate $(git describe --tags --abbrev=0 @^)..@)" > release_body.txt
 
       - name: Release
         uses: softprops/action-gh-release@master
@@ -47,4 +44,4 @@ jobs:
           files: |
             libturbo.so
             libturbo.dylib
-          body: ${{ env.DESCRIPTION }}
+          body_path: release_body.txt
