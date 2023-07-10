@@ -62,7 +62,13 @@ Please note that Turbo is still in development and not recommended for productio
 To get started with Turbo, here is an example:
 
 ```ts
-import { find, free, init, load, type Routes } from "https://deno.land/x/turbo/mod.ts";
+import {
+  find,
+  free,
+  init,
+  load,
+  type Routes,
+} from "https://deno.land/x/turbo/mod.ts";
 
 // Define the hostname and port for the server
 const HOSTNAME = "localhost";
@@ -75,19 +81,14 @@ const routes: Routes = [
 
   // Example routes
   [() => new Response("hello world!", { status: 200 }), "GET", "/hello"],
-  [() => new Response("welcome", { status: 201 }), "POST", "/welcome"],
-  [() => new Response("dummy route", { status: 200 }), "GET", "/dummy"],
-  [() => new Response("success", { status: 200 }), "POST", "/success"],
-  [() => new Response("not found", { status: 404 }), "GET", "/not-found"],
-  [() => new Response("no access", { status: 403 }), "GET", "/access-denied"],
   [() => new Response("invalid request", { status: 400 }), "POST", "/invalid"],
   [() => new Response("forbidden", { status: 403 }), "GET", "/forbidden"],
+  [() => new Response("not found", { status: 404 }), "GET", "/not-found"],
   [() => new Response("server error", { status: 500 }), "GET", "/error"],
-  [() => new Response("auth required", { status: 401 }), "GET", "/auth"],
 ];
 
 // Load the Turbo library
-const turbo = load();
+const turbo = await load();
 
 // Initialize the routes search tree and get the root node
 const root = init(turbo, routes);
