@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: apt-get update && apt-get install -y --no-install-recommends make gcc libc6-dev
+
+      - name: Build Native Library
+        run: make
+
+      - name: Strip Native Library (Linux)
+        if: runner.os == 'Linux'
+        run: strip libturbo.so
+
+      - name: Release
+        uses: softprops/action-gh-release@master
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "release draft"
+          draft: true
+          files: |
+            libturbo.so
+            libturbo.dylib
