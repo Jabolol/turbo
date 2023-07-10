@@ -24,7 +24,7 @@ typedef struct node {
  * @return A pointer to the root node of the constructed tree, or NULL if
  * memory allocation fails.
  */
-node_t *_init(char *data);
+node_t *_open(char *data);
 
 /**
  * @brief Finds a node in the tree based on the given path and method.
