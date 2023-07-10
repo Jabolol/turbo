@@ -1,4 +1,5 @@
-import { type LibTurbo, type Routes } from "./mod.ts";
+import { dlopen, type LibTurbo, type Routes } from "./mod.ts";
+import { github, name, version } from "./deno.json" assert { type: "json" };
 
 const encoder = new TextEncoder();
 
@@ -6,7 +7,7 @@ const encoder = new TextEncoder();
  * Symbols for the FFI library.
  */
 export const _symbols = {
-  _init: { parameters: ["buffer"], result: "pointer" },
+  _open: { parameters: ["buffer"], result: "pointer" },
   _find: { parameters: ["pointer", "buffer", "buffer"], result: "i32" },
   _free: { parameters: ["pointer"], result: "void" },
 } as const;
@@ -26,11 +27,14 @@ const extensions: { [k in typeof Deno.build.os]?: string } = {
  * const turbo = load();
  * ```
  */
-export const load = (): LibTurbo => {
+export const load = async (): Promise<LibTurbo> => {
   if (!(Deno.build.os in extensions)) {
     throw new Error("Unsupported platform.");
   }
-  return Deno.dlopen(`./libturbo.${extensions[Deno.build.os]}`, _symbols);
+  return await dlopen({
+    name,
+    url: `${github}/releases/download/${version}/`,
+  }, _symbols);
 };
 
 /**
@@ -48,7 +52,7 @@ export const init = (
   turbo: LibTurbo,
   routes: Routes,
 ): Deno.PointerValue => {
-  const pointer = turbo.symbols._init(
+  const pointer = turbo.symbols._open(
     encoder.encode(JSON.stringify(routes) + "\0"),
   );
   if (!pointer) throw new Error("Failed to prepare routes");
