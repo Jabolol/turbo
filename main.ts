@@ -1,5 +1,5 @@
 import { dlopen, type LibTurbo, type Routes } from "./mod.ts";
-import { github, name, version } from "./deno.json" assert { type: "json" };
+import config from "./deno.json" assert { type: "json" };
 
 const encoder = new TextEncoder();
 
@@ -32,8 +32,8 @@ export const load = async (): Promise<LibTurbo> => {
     throw new Error("Unsupported platform.");
   }
   return await dlopen({
-    name,
-    url: `${github}/releases/download/${version}/`,
+    name: config.name,
+    url: `${config.github}/releases/download/v${config.version}/`,
   }, _symbols);
 };
 
