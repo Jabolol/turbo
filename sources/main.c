@@ -1,6 +1,6 @@
 #include "../include/turbo.h"
 
-node_t *_init(char *data)
+node_t *_open(char *data)
 {
     node_t *root = NULL;
     int64_t level = 0, index = 0, cursor = 0, length = 0;
