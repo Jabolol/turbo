@@ -1,0 +1,9 @@
+{
+  "name": "turbo",
+  "version": "0.3.0",
+  "github": "https://github.com/Jabolol/turbo",
+
+  "imports": {
+    "plug": "https://deno.land/x/plug@1.0.2/mod.ts"
+  }
+}
