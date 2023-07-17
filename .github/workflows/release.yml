@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
-        run: choco install mingw make -y
+        run: choco install make -y
 
       - name: Build Native Library
         run: make
