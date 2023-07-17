@@ -15,6 +15,7 @@ export const _symbols = {
 const extensions: { [k in typeof Deno.build.os]?: string } = {
   darwin: "dylib",
   linux: "so",
+  windows: "dll",
 };
 
 /**
