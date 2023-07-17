@@ -96,11 +96,24 @@ const root = init(turbo, routes);
 // Create the request handler using the Turbo library and routes
 const handler = find(turbo, routes, root);
 
+// Free up resources and close the Turbo library
+Deno.addSignalListener("SIGINT", () => {
+  free(turbo, root);
+  Deno.exit(0);
+});
+
+let triggered = false;
+
+globalThis.addEventListener("beforeunload", (evt) => {
+  if (!triggered) {
+    triggered = true;
+    evt.preventDefault();
+    free(turbo, root);
+  }
+});
+
 // Start the server and listen for incoming requests
 await Deno.serve({ port: PORT, hostname: HOSTNAME }, handler).finished;
-
-// Free up resources and close the Turbo library
-free(turbo, root);
 ```
 
 ## License
