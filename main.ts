@@ -77,15 +77,14 @@ export const find = (
   routes: Routes,
   root: Deno.PointerValue,
 ): (r: Request) => Response =>
-(r: Request) => {
-  return routes[
+(r: Request) =>
+  routes[
     turbo.symbols._find(
       root,
       encoder.encode(r.method + "\0"),
       encoder.encode(r.url + "\0"),
     )
   ][0](r);
-};
 
 /**
  * Frees up the route tree and closes the FFI library.
