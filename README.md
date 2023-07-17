@@ -1,6 +1,6 @@
 <details>
   <summary><strong>Summary</strong></summary><br />
-Turbo is a micro web framework built for <strong>efficiency</strong>, leveraging Deno's FFI and TypeScript. It aims to provide <strong>blazing</strong> fast performance and <strong>simplicity</strong> for web development. Please note that Turbo is currently under development and not ready for production use. It is currently supported only on <code>Linux</code> and <code>macOS</code> platforms.
+Turbo is a micro web framework built for <strong>efficiency</strong>, leveraging Deno's FFI and TypeScript. It aims to provide <strong>blazing</strong> fast performance and <strong>simplicity</strong> for web development. Please note that Turbo is currently under development and not ready for production use. It is currently supported only on <code>Linux</code>, <code>macOS</code> and <code>Windows</code> platforms.
 
 </details>
 
@@ -55,7 +55,7 @@ Turbo follows a streamlined execution flow, avoiding unnecessary overhead and co
 Turbo is intentionally kept lightweight to eliminate unnecessary abstractions and reduce overhead. It provides a minimalistic set of features, ensuring that your application can run at peak performance without being weighed down by unnecessary functionality.
 
 </details>
-Please note that Turbo is still in development and not recommended for production use. It is currently supported only on <code>Linux</code> and <code>macOS</code> platforms.
+Please note that Turbo is still in development and not recommended for production use. It is currently supported only on <code>Linux</code>, <code>macOS</code> and <code>Windows</code> platforms.
 
 ## Example
 
