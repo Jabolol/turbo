@@ -11,12 +11,18 @@ DEPS := $(patsubst %.o,%.d,$(OBJS))
 
 LIB_NAME := libturbo
 
-ifeq ($(shell uname),Darwin)
-	LIB_EXT := dylib
-	LIB_LDFLAGS := -dynamiclib
-else
-	LIB_EXT := so
+ifeq ($(OS), Windows_NT)
+	LIB_NAME = turbo
+	LIB_EXT := dll
 	LIB_LDFLAGS := -shared
+else
+	ifeq ($(shell uname),Darwin)
+		LIB_EXT := dylib
+		LIB_LDFLAGS := -dynamiclib
+	else
+		LIB_EXT := so
+		LIB_LDFLAGS := -shared
+	endif
 endif
 
 .PHONY: all
