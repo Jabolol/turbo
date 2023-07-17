@@ -68,18 +68,20 @@ void _free(node_t *root)
 
 node_t *_tree(node_t *root, int32_t total)
 {
+    int32_t cmp = 0;
     node_t *current = root;
 
     for (int32_t i = 1; (root + i)->method; i++) {
         while (1) {
-            if (strcmp((root + i)->path, current->path) < 0) {
+            cmp = strcmp((root + i)->path, current->path);
+            if (cmp < 0) {
                 if (current->left) {
                     current = current->left;
                 } else {
                     current->left = root + i;
                     break;
                 }
-            } else if (strcmp((root + i)->path, current->path) > 0) {
+            } else if (cmp > 0) {
                 if (current->right) {
                     current = current->right;
                 } else {
